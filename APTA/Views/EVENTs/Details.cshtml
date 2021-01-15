@@ -1,0 +1,76 @@
+﻿@*@model APTA.Models.EVENT*@
+@model APTA.Models.viewmodel.EventsViewModel
+
+@{
+    ViewBag.Title = "Event Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .AttendeeList {
+        width: 181px;
+        height: 145px;
+        border: 1px solid #615f67;
+        padding: 7px 20px;
+        margin-top: 10px;
+        overflow-y: scroll;
+    }
+</style>
+<h2>Event Details</h2>
+
+<div>
+    <h4>EVENT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CENTER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CENTER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ORGANISER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ORGANISER)
+        </dd>
+
+        <dt>
+            List Of Attendee
+        </dt>
+
+        <dd>
+            <ul class="AttendeeList">
+                @foreach (var item in ViewBag.ListStudents)
+                {
+                    <li>
+                        @item
+                    </li>
+                }
+            </ul>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EVENT_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,41 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <a href="https://www.apta.asia/">
+                    <img class="logo" src="~/Content/Images/APTA.jpg" />
+                </a>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="nav navbar-nav pull-right top-nav">
+                            <li>@Html.ActionLink("Home", "HomePage", "Home",null, new { @class = "btn btn-default" })</li>
+                            @*<li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = "btn btn-default" })</li>*@
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="nav navbar-nav pull-right bottom-nav">
+                            <li class="nav-item">
+                                @Html.ActionLink("Attendee", "Index", "STUDENTs", null, null)
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Organiser", "Index", "ORGANISERs", null, null)
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Events", "Index", "EVENTs", null, null)
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Location", "Index", "CENTERs", null, null)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>

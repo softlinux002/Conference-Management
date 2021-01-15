@@ -1,0 +1,65 @@
+﻿@*@model IEnumerable<APTA.Models.STUDENT>*@
+@model IEnumerable<APTA.Models.viewmodel.StudentsViewModel>
+@{
+    ViewBag.Title = "list All Attendee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>list All Attendee</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LAST_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FIRST_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHONE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.REGISTRATION_DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EVENT) @*use model.EVENT.NAME when you have connected database *@
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LAST_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FIRST_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHONE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMAIL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.REGISTRATION_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EVENT) @*use model.EVENT.NAME when you have connected database *@
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.STUDENT_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.STUDENT_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.STUDENT_ID })
+            </td>
+        </tr>
+    }
+
+</table>

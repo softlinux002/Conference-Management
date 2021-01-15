@@ -1,0 +1,68 @@
+﻿@*@model APTA.Models.STUDENT*@
+@model APTA.Models.viewmodel.StudentsViewModel
+
+@{
+    ViewBag.Title = "Attendee Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Attendee Details</h2>
+
+<div>
+    <h4>STUDENT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LAST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LAST_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIRST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIRST_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PHONE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PHONE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REGISTRATION_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REGISTRATION_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EVENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EVENT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.STUDENT_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

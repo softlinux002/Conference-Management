@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="APTAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CENTER">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="EVENTS">
+    <Key>
+      <PropertyRef Name="EVENT_ID" />
+    </Key>
+    <Property Name="EVENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="DATE" Type="datetime" />
+    <Property Name="ORGANISER_ID" Type="int" Nullable="false" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="ORGANISER">
+    <Key>
+      <PropertyRef Name="ORGANISER_ID" />
+    </Key>
+    <Property Name="ORGANISER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LAST_NAME" Type="nvarchar" MaxLength="64" />
+    <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="64" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="16" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="STUDENTS">
+    <Key>
+      <PropertyRef Name="STUDENT_ID" />
+    </Key>
+    <Property Name="STUDENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LAST_NAME" Type="nvarchar" MaxLength="64" />
+    <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="64" />
+    <Property Name="PHONE" Type="nvarchar" MaxLength="16" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+    <Property Name="REGISTRATION_DATE" Type="datetime" />
+    <Property Name="EVENT_ID" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <Association Name="FK__EVENTS__Location__49C3F6B7">
+    <End Role="CENTER" Type="Self.CENTER" Multiplicity="1" />
+    <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTER">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="EVENTS">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EVENTS__ORGANISE__4AB81AF0">
+    <End Role="ORGANISER" Type="Self.ORGANISER" Multiplicity="1" />
+    <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANISER">
+        <PropertyRef Name="ORGANISER_ID" />
+      </Principal>
+      <Dependent Role="EVENTS">
+        <PropertyRef Name="ORGANISER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__STUDENTS__EVENT___4D94879B">
+    <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="1" />
+    <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENTS">
+        <PropertyRef Name="EVENT_ID" />
+      </Principal>
+      <Dependent Role="STUDENTS">
+        <PropertyRef Name="EVENT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="APTAModelStoreContainer">
+    <EntitySet Name="CENTER" EntityType="Self.CENTER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EVENTS" EntityType="Self.EVENTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORGANISER" EntityType="Self.ORGANISER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__EVENTS__Location__49C3F6B7" Association="Self.FK__EVENTS__Location__49C3F6B7">
+      <End Role="CENTER" EntitySet="CENTER" />
+      <End Role="EVENTS" EntitySet="EVENTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EVENTS__ORGANISE__4AB81AF0" Association="Self.FK__EVENTS__ORGANISE__4AB81AF0">
+      <End Role="ORGANISER" EntitySet="ORGANISER" />
+      <End Role="EVENTS" EntitySet="EVENTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__STUDENTS__EVENT___4D94879B" Association="Self.FK__STUDENTS__EVENT___4D94879B">
+      <End Role="EVENTS" EntitySet="EVENTS" />
+      <End Role="STUDENTS" EntitySet="STUDENTS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

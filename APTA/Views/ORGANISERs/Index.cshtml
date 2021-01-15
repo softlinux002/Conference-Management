@@ -1,0 +1,57 @@
+﻿@*@model IEnumerable<APTA.Models.ORGANISER>*@
+@model IEnumerable<APTA.Models.viewmodel.OrganiserViewModel>
+
+@{
+    ViewBag.Title = "List All Organizers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List All Organizers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LAST_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FIRST_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHONE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.IsDeleted == false)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LAST_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FIRST_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PHONE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ORGANISER_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ORGANISER_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ORGANISER_ID })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="APTAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CENTER">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="EVENTS">
+          <Key>
+            <PropertyRef Name="EVENT_ID" />
+          </Key>
+          <Property Name="EVENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DATE" Type="datetime" />
+          <Property Name="ORGANISER_ID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ORGANISER">
+          <Key>
+            <PropertyRef Name="ORGANISER_ID" />
+          </Key>
+          <Property Name="ORGANISER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_NAME" Type="nvarchar" MaxLength="64" />
+          <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="64" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="16" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="STUDENTS">
+          <Key>
+            <PropertyRef Name="STUDENT_ID" />
+          </Key>
+          <Property Name="STUDENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_NAME" Type="nvarchar" MaxLength="64" />
+          <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="64" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="16" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+          <Property Name="REGISTRATION_DATE" Type="datetime" />
+          <Property Name="EVENT_ID" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <Association Name="FK__EVENTS__Location__49C3F6B7">
+          <End Role="CENTER" Type="Self.CENTER" Multiplicity="1" />
+          <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CENTER">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="EVENTS">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVENTS__ORGANISE__4AB81AF0">
+          <End Role="ORGANISER" Type="Self.ORGANISER" Multiplicity="1" />
+          <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANISER">
+              <PropertyRef Name="ORGANISER_ID" />
+            </Principal>
+            <Dependent Role="EVENTS">
+              <PropertyRef Name="ORGANISER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__STUDENTS__EVENT___4D94879B">
+          <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="1" />
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTS">
+              <PropertyRef Name="EVENT_ID" />
+            </Principal>
+            <Dependent Role="STUDENTS">
+              <PropertyRef Name="EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="APTAModelStoreContainer">
+          <EntitySet Name="CENTER" EntityType="Self.CENTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENTS" EntityType="Self.EVENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORGANISER" EntityType="Self.ORGANISER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EVENTS__Location__49C3F6B7" Association="Self.FK__EVENTS__Location__49C3F6B7">
+            <End Role="CENTER" EntitySet="CENTER" />
+            <End Role="EVENTS" EntitySet="EVENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVENTS__ORGANISE__4AB81AF0" Association="Self.FK__EVENTS__ORGANISE__4AB81AF0">
+            <End Role="ORGANISER" EntitySet="ORGANISER" />
+            <End Role="EVENTS" EntitySet="EVENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__STUDENTS__EVENT___4D94879B" Association="Self.FK__STUDENTS__EVENT___4D94879B">
+            <End Role="EVENTS" EntitySet="EVENTS" />
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="APTAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CENTER">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EVENTS" Relationship="APTAModel.FK__EVENTS__Location__49C3F6B7" FromRole="CENTER" ToRole="EVENT" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ORGANISER">
+          <Key>
+            <PropertyRef Name="ORGANISER_ID" />
+          </Key>
+          <Property Name="ORGANISER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PHONE" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EVENTS" Relationship="APTAModel.FK__EVENTS__ORGANISE__4AB81AF0" FromRole="ORGANISER" ToRole="EVENT" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="APTAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CENTERs" EntityType="Self.CENTER" />
+          <EntitySet Name="ORGANISERs" EntityType="Self.ORGANISER" />
+          <EntitySet Name="EVENTS" EntityType="APTAModel.EVENT" />
+          <AssociationSet Name="FK__EVENTS__Location__49C3F6B7" Association="APTAModel.FK__EVENTS__Location__49C3F6B7">
+            <End Role="CENTER" EntitySet="CENTERs" />
+            <End Role="EVENT" EntitySet="EVENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVENTS__ORGANISE__4AB81AF0" Association="APTAModel.FK__EVENTS__ORGANISE__4AB81AF0">
+            <End Role="ORGANISER" EntitySet="ORGANISERs" />
+            <End Role="EVENT" EntitySet="EVENTS" />
+          </AssociationSet>
+          <EntitySet Name="STUDENTS" EntityType="APTAModel.STUDENT" />
+          <AssociationSet Name="FK__STUDENTS__EVENT___4D94879B" Association="APTAModel.FK__STUDENTS__EVENT___4D94879B">
+            <End Role="EVENT" EntitySet="EVENTS" />
+            <End Role="STUDENT" EntitySet="STUDENTS" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="EVENT_ID" />
+          </Key>
+          <Property Name="EVENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DATE" Type="DateTime" Precision="3" />
+          <Property Name="ORGANISER_ID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CENTER" Relationship="APTAModel.FK__EVENTS__Location__49C3F6B7" FromRole="EVENT" ToRole="CENTER" />
+          <NavigationProperty Name="ORGANISER" Relationship="APTAModel.FK__EVENTS__ORGANISE__4AB81AF0" FromRole="EVENT" ToRole="ORGANISER" />
+          <NavigationProperty Name="STUDENTS" Relationship="APTAModel.FK__STUDENTS__EVENT___4D94879B" FromRole="EVENT" ToRole="STUDENT" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK__EVENTS__Location__49C3F6B7">
+          <End Type="APTAModel.CENTER" Role="CENTER" Multiplicity="1" />
+          <End Type="APTAModel.EVENT" Role="EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CENTER">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVENTS__ORGANISE__4AB81AF0">
+          <End Type="APTAModel.ORGANISER" Role="ORGANISER" Multiplicity="1" />
+          <End Type="APTAModel.EVENT" Role="EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANISER">
+              <PropertyRef Name="ORGANISER_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="ORGANISER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="STUDENT_ID" />
+          </Key>
+          <Property Name="STUDENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PHONE" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="REGISTRATION_DATE" Type="DateTime" Precision="3" />
+          <Property Name="EVENT_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EVENT" Relationship="APTAModel.FK__STUDENTS__EVENT___4D94879B" FromRole="STUDENT" ToRole="EVENT" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK__STUDENTS__EVENT___4D94879B">
+          <End Type="APTAModel.EVENT" Role="EVENT" Multiplicity="1" />
+          <End Type="APTAModel.STUDENT" Role="STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EVENT_ID" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="APTAModelStoreContainer" CdmEntityContainer="APTAEntities">
+          <EntitySetMapping Name="CENTERs">
+            <EntityTypeMapping TypeName="APTAModel.CENTER">
+              <MappingFragment StoreEntitySet="CENTER">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORGANISERs">
+            <EntityTypeMapping TypeName="APTAModel.ORGANISER">
+              <MappingFragment StoreEntitySet="ORGANISER">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ORGANISER_ID" ColumnName="ORGANISER_ID" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTS">
+            <EntityTypeMapping TypeName="APTAModel.EVENT">
+              <MappingFragment StoreEntitySet="EVENTS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ORGANISER_ID" ColumnName="ORGANISER_ID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STUDENTS">
+            <EntityTypeMapping TypeName="APTAModel.STUDENT">
+              <MappingFragment StoreEntitySet="STUDENTS">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+                <ScalarProperty Name="REGISTRATION_DATE" ColumnName="REGISTRATION_DATE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

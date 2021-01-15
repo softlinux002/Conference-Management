@@ -1,0 +1,57 @@
+﻿@*@model IEnumerable<APTA.Models.EVENT>*@
+@model IEnumerable<APTA.Models.viewmodel.EventsViewModel>
+
+@{
+    ViewBag.Title = "List All Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List All Events</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CENTER)@*use model.CENTER.NAME when you have connected database *@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ORGANISER)@*use model.ORGANISER.NAME when you have connected database *@
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.IsDeleted == false)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CENTER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ORGANISER)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EVENT_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EVENT_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EVENT_ID })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
